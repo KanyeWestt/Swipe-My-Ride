@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:swipe_my_ride/record.dart';
+import 'record.dart';
 
 class DetailPage extends StatelessWidget {
   final Record record;

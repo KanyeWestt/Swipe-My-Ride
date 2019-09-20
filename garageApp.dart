@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:swipe_my_ride/record.dart';
-import 'package:swipe_my_ride/detailPage.dart';
+import 'package:swipe_my_ride_final/mainScreen.dart';
+import 'record.dart';
+import 'detailPage.dart';
+import 'home_page.dart';
 
 void main() => runApp(GarageApp());
 
@@ -26,8 +28,34 @@ class _GaragePageState extends State<GaragePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('The Crib')),
+      appBar: AppBar(actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.keyboard_backspace),
+          onPressed: () {
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => SwipeMyRideMain()),
+            );
+          },
+        )
+      ],
+        title: Text('Swipe My Ride')),
       body: _buildBody(context),
+        floatingActionButton: Padding(
+            padding: const EdgeInsets.only(bottom: 570, right: 10),
+            child: FloatingActionButton(
+              child: Icon(Icons.navigation),
+              backgroundColor: Colors.green,
+              onPressed: () {
+                {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                }
+              },
+            )
+        )
     );
   }
 

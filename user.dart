@@ -1,7 +1,7 @@
 //Dummy user class for when creating a save button
-class User{
+class User {
   final String name;
   final String age;
-  User (this.name, this.age);
 
-
+  User(this.name, this.age);
+}

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:swipe_my_ride/record.dart';
+import 'record.dart';
 import 'user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -15,7 +15,12 @@ class SaveButton extends StatelessWidget {
         builder: (context, AsyncSnapshot<bool> result) {
           if (!result.hasData)
             return Container(
-              child: IconButton(icon: Icon(Icons.favorite), color: Colors.red),
+//                child:
+//                    IconButton( onPressed: () {
+//                      icon:
+//                      Icon(Icons.favorite),
+//                      color: Colors.red
+//                    }));
             );
           else
             return Container(
