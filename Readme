@@ -9,4 +9,12 @@ user generated. In the future, we plan to add a word scraping functionality to p
 
 How to use the app:
 
-To be continued...
+1. MainScreen.dart displays the images of the cars for the user to view.
+2. Users will have the ability to save the car into the GarageApp.dart page to view later.
+3. Users can then interact with the saved cars further by messaging the person selling the car or viewing extra details about it.
+4. Users will also be able to set their preferences to find cars matching the preferences criteria.
+
+
+Conclusion:
+
+The purpose of this app is to make purchasing cars and sellings cars easier for users as the current way to do this is quite clunky.
