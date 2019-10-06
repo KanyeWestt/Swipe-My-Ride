@@ -1,3 +1,13 @@
+ATTENTION MARKERS:
+To run our app, create a new Adroid Studio project and download all the files with the extension '.dart' into the lib folder of your project.
+
+Before running our app, please ensure the json file is inserted into the app folder of your project. Please copy and paste the contents of
+the app level build.gradle file, the project level build.gradle file, and the pubspec.yaml file into the respective folders in your project.
+
+THANK YOU
+
+
+
 Swipe My Ride
 
 This app creates a fresh new way for people to browse new or used cars to purchase. It allows users to swipe left or right on a picture
@@ -18,3 +28,4 @@ How to use the app:
 Conclusion:
 
 The purpose of this app is to make purchasing cars and sellings cars easier for users as the current way to do this is quite clunky.
+
