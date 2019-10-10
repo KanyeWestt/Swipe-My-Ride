@@ -6,7 +6,7 @@ void main() => runApp(UploadForm());
 class UploadForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Form Validation Demo';
+    final appTitle = 'Car Details';
 
     return MaterialApp(
       title: appTitle,
