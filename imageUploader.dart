@@ -14,6 +14,8 @@ class ImageUploaderRun extends StatelessWidget {
       home: ImageUploader(),
     );
   }
+
+//  ImageUploader.
 }
 
 class ImageUploader extends StatefulWidget {
@@ -24,25 +26,26 @@ class ImageUploader extends StatefulWidget {
 }
 
 class _ImageUploaderState extends State<ImageUploader> {
-  File _image;        //image will be stored here
-  String _uploadedFileURL;      //storage url will be stored here
+  File _image; //image will be stored here
+  String _uploadedFileURL; //storage url will be stored here
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload Image'),
+        title: Text('Upload Car Image'),
       ),
       body: Center(
         child: Column(
           children: <Widget>[
-            Text('Selected Image'),
+            Text('Selected Image:'),
             _image != null
                 ? Image.asset(
                     _image.path,
                     height: 150,
                   )
                 : Container(height: 150),
+            SizedBox(height: 25),
             _image == null
                 ? RaisedButton(
                     child: Text('Choose File'),
@@ -53,7 +56,7 @@ class _ImageUploaderState extends State<ImageUploader> {
             _image != null
                 ? RaisedButton(
                     child: Text('Upload File'),
-                    onPressed: uploadFile,
+                    onPressed: callUploadFile,
                     color: Colors.cyan,
                   )
                 : Container(),
@@ -63,7 +66,8 @@ class _ImageUploaderState extends State<ImageUploader> {
                     onPressed: clearSelection,
                   )
                 : Container(),
-            Text('Uploaded Image'),
+            SizedBox(height: 25),
+            Text('Image Uploaded:'),
             _uploadedFileURL != null
                 ? Image.network(
                     _uploadedFileURL,
@@ -76,13 +80,10 @@ class _ImageUploaderState extends State<ImageUploader> {
     );
   }
 
-  Future uploadFile() async {
-    StorageReference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('users/${Path.basename(_image.path)}}');
-    StorageUploadTask uploadTask = storageReference.putFile(_image);
-    await uploadTask.onComplete;
-    print('File Uploaded');
+  void callUploadFile() {
+    UploadFile uploadFile = new UploadFile();
+    uploadFile.uploadFile(_image);
+    StorageReference storageReference = uploadFile.getStorageReference();
     storageReference.getDownloadURL().then((fileURL) {
       setState(() {
         _uploadedFileURL = fileURL;
@@ -98,10 +99,30 @@ class _ImageUploaderState extends State<ImageUploader> {
     });
   }
 
-  clearSelection(){
+  void clearSelection() {
     this._uploadedFileURL = null;
     setState(() {
       _image = null;
     });
+  }
+}
+
+class UploadFile {
+  StorageReference _storageReference;
+  Future uploadFile(File image) async {
+    _storageReference = FirebaseStorage.instance
+        .ref()
+        .child('users/${Path.basename(image.path)}}');
+    StorageUploadTask uploadTask = _storageReference.putFile(image);
+    await uploadTask.onComplete;
+    print('File Uploaded');
+  }
+
+  StorageReference getStorageReference() {
+    if (this._storageReference != null) {
+      return this._storageReference;
+    } else {
+      return null;
+    }
   }
 }
