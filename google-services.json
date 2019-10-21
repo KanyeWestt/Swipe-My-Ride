@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "745737248852",
+    "firebase_url": "https://swipe-my-ride.firebaseio.com",
+    "project_id": "swipe-my-ride",
+    "storage_bucket": "swipe-my-ride.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745737248852:android:0d38da9c7e97d579",
+        "android_client_info": {
+          "package_name": "com.example.swipe_my_ride"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745737248852-5ppg14u6qcqjfkjr014mkk29v5lbpbm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1FdTCVRQ37SeOpfDPPrZeXmrel32cLLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745737248852-5ppg14u6qcqjfkjr014mkk29v5lbpbm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
