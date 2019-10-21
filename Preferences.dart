@@ -1,176 +1,164 @@
 import 'package:flutter/material.dart';
-void main() => runApp(MaterialApp(
-  home: DropDown(),
-));
-class DropDown extends StatefulWidget {
-  @override
-  DropDownState createState() => DropDownState();
+import 'package:preferences/preferences.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:validators/validators.dart';
+
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await PrefService.init(prefix: 'pref_');
+
+  PrefService.setDefaultValues({' ': ' '});
+
+  runApp(MyApp());
 }
 
-class Preference {
-  int id;
-  String name;
-
-  Preference(this.id, this.name);
-
-  static List<Preference> getPreferences() {
-    return <Preference>[
-
-      Preference(0, 'Make'),
-      Preference(1, 'Mazda'),
-      Preference(2, 'Toyota'),
-      Preference(3, 'Nissan'),
-      Preference(4, 'Holden'),
-    ];
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new DynamicTheme(
+        defaultBrightness: Brightness.light,
+        data: (brightness) =>
+            new ThemeData(brightness: brightness, accentColor: Colors.green),
+        themedWidgetBuilder: (context, theme) {
+          return new MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Preferences',
+            theme: theme,
+            home: new MyHomePage(title: 'Preferences'),
+          );
+        });
   }
 }
 
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
 
-class DropDownState extends State<DropDown> {
-
-
-  List<Preference> _preferences = Preference.getPreferences();
-  List<DropdownMenuItem<Preference>> _dropdownMenuItems;
-  Preference _selectedPreference;
-
-  bool pref1 = false;
-  bool pref2 = false;
-  bool pref3 = false;
+  final String title;
 
   @override
-  void initState() {
-    _dropdownMenuItems = buildDropdownMenuItems(_preferences);
-    _selectedPreference = _dropdownMenuItems[0].value;
-    super.initState();
-  }
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
-  List<DropdownMenuItem<Preference>> buildDropdownMenuItems(List preferences) {
-    List<DropdownMenuItem<Preference>> items = List();
-    for (Preference preference in preferences) {
-      items.add(
-        DropdownMenuItem(
-          value: preference,
-          child: Text(preference.name),
-        ),
-      );
-    }
-    return items;
-  }
-
-  onChangeDropdownItem(Preference selectedPreference) {
-    setState(() {
-      _selectedPreference = selectedPreference;
-    });
-  }
-
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
 
-          backgroundColor: Colors.blueGrey,
-          leading: Container(
+        backgroundColor: Colors.blueGrey,
+        leading: Container(
 
-              margin: EdgeInsets.only(left: 15),
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            margin: EdgeInsets.only(left: 15),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
 
-              )
-          ),
-
-          actions: <Widget>[
-            Container(
-
-
-
-              margin: EdgeInsets.only(right: 25),
-              child: Icon(Icons.account_circle),
             )
-          ],
-          title: new Text("Preferences"),
-
-          centerTitle: true,
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
+
+        actions: <Widget>[
+          Container(
 
 
-              Padding(
 
-                  padding: const EdgeInsets.all(10.0),
-                  child: RaisedButton(
-                    child: Text('Clear'),
-
-                  )
-              ),
-
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text("Select car preferences"),
+            margin: EdgeInsets.only(right: 25),
+            child: Icon(Icons.account_circle),
+          )
+        ],
+        title: Text(widget.title),
       ),
+      body: PreferencePage([
 
-            DropdownButton(
-              value: _selectedPreference,
-              items: _dropdownMenuItems,
-              onChanged: onChangeDropdownItem,
-            ),
+        PreferenceTitle('Search'),
+        TextFieldPreference(
+          'Enter a car name',
+          'user_display_name',
+        ),
+        TextFieldPreference('Car Model', ' ',
+            defaultVal: ' ', validator: (str) {
+              if (!isEmail(str)) {
+                return " ";
+              }
+              return null;
+            }),
 
+        PreferenceTitle('Select'),
+        DropdownPreference(
+          'Car type',
+          'Car_type',
+          defaultVal: 'Car',
+          values: ['Car', 'Timeline', 'Truck'],
+        ),
+        PreferenceTitle('Transmission'),
+        RadioPreference(
+          'Automatic',
+          'auto',
+          'ui_theme',
+          isDefault: true,
+          onSelect: () {
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Automatic"),
-                  Checkbox(
-                    value: pref1,
-                    onChanged: (bool value) {
-                      setState(() {
-                        pref1 = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
+          },
+        ),
+        RadioPreference(
+          'Manual',
+          'manual',
+          'ui_theme',
+          onSelect: () {
 
+          },
+        ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-
-                children: <Widget>[
-                  Text("Manual     "),
-                  Checkbox(
-                    value: pref2,
-                    onChanged: (bool value) {
-                      setState(() {
-                        pref2 = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Triptonic   "),
-                  Checkbox(
-                    value: pref3,
-                    onChanged: (bool value) {
-                      setState(() {
-                        pref3 = value;
-                        Column(
-
-                        );
-                      });
-                    },
-                  ),
-                ],
-              ),
+        PreferenceTitle('Fuel'),
+        PreferenceDialogLink(
+          'Fuel Types',
+          dialog: PreferenceDialog(
+            [
+              CheckboxPreference('91', 'content_show_text'),
+              CheckboxPreference('95', 'content_show_image'),
+              CheckboxPreference('Diesel', 'content_show_audio')
             ],
+            title: 'Select fuel types',
+            cancelText: 'Cancel',
+            submitText: 'Save',
+            onlySaveOnSubmit: true,
           ),
-        ));
+        ),
+        PreferenceTitle('Other Preferences'),
+        PreferenceDialogLink(
+          'Price Range',
+          dialog: PreferenceDialog(
+            [
+              RadioPreference(
+                  'Cheap', 'select_1', 'android_listpref_selected'),
+              RadioPreference(
+                  'Medium', 'select_2', 'android_listpref_selected'),
+              RadioPreference('Expensive', 'select_3', 'android_listpref_selected'),
+            ],
+            title: 'Select an option',
+            cancelText: 'Cancel',
+            submitText: 'Save',
+            onlySaveOnSubmit: true,
+          ),
+        ),
+        PreferenceDialogLink(
+          'Car Year',
+          dialog: PreferenceDialog(
+            [
+              RadioPreference(
+                  '1950 - 1970', 'select_1', 'android_listpref_auto_selected'),
+              RadioPreference(
+                  '1971 - 2000', 'select_2', 'android_listpref_auto_selected'),
+              RadioPreference(
+                  '2000+', 'select_3', 'android_listpref_auto_selected'),
+            ],
+            title: 'Select an option',
+            cancelText: 'Close',
+          ),
+        ),
+
+
+      ]),
+    );
   }
 }
