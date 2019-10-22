@@ -34,6 +34,7 @@ class Record {
 
   String getDocID() {
     return this.reference.documentID;
+
   }
 
   @override

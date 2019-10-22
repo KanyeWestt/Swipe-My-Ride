@@ -11,13 +11,16 @@ class UploadCarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: RaisedButton(
-      child: Text('Upload Car'),
-      onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => UploadForm()));
-      },
-      color: Colors.cyan,
-    ));
+        child: IconButton(
+            icon: Icon(Icons.file_upload),
+            color: Colors.blue,
+            iconSize: 60,
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => UploadForm()),
+              );
+//                      this.user.updateDB(this.record.getDocID());
+            }));
   }
 }

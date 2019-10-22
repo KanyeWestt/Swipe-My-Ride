@@ -12,8 +12,8 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen>{
 
 
-   TextEditingController _textController = new TextEditingController();
-   List<ChatMessage> _messages = <ChatMessage> [];
+  TextEditingController _textController = new TextEditingController();
+  List<ChatMessage> _messages = <ChatMessage> [];
 
 
   void _handleSubmitted(String text){
@@ -29,28 +29,28 @@ class ChatScreenState extends State<ChatScreen>{
   Widget _textComposerWidget(){
     return new IconTheme(
       data: new IconThemeData(
-        color: Colors.blue ),
+          color: Colors.purpleAccent ),
       child: new Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: new Row(
-        children: <Widget>[
-          new Flexible(
-            child: new TextField(
-              decoration: new InputDecoration.collapsed( hintText: "Send a message"),
-              controller: _textController,
-              onSubmitted: _handleSubmitted,
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: new Row(
+          children: <Widget>[
+            new Flexible(
+              child: new TextField(
+                decoration: new InputDecoration.collapsed( hintText: "Send a message"),
+                controller: _textController,
+                onSubmitted: _handleSubmitted,
+              ),
             ),
-          ),
-          new Container(
-            margin: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: new IconButton(
-              icon: new Icon(Icons.send),
-              onPressed: ()=> _handleSubmitted(_textController.text)
+            new Container(
+              margin: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: new IconButton(
+                  icon: new Icon(Icons.send),
+                  onPressed: ()=> _handleSubmitted(_textController.text)
               ),
             ),
           ],
+        ),
       ),
-    ),
     );
   }
 
@@ -60,39 +60,39 @@ class ChatScreenState extends State<ChatScreen>{
       body: new Column(
         children: <Widget>[
 
-        new Flexible(
-          child: new ListView.builder(
-            padding: new EdgeInsets.all(8.0),
-            reverse: true,
-            itemBuilder: (_,int index) => _messages[index],
-            itemCount: _messages.length,
+          new Flexible(
+            child: new ListView.builder(
+              padding: new EdgeInsets.all(8.0),
+              reverse: true,
+              itemBuilder: (_,int index) => _messages[index],
+              itemCount: _messages.length,
+            ),
           ),
-        ),
-        new Divider(height: 1.0,),
-        new Container(
-          decoration: new BoxDecoration(
-            color: Theme.of(context).cardColor,
-          ),
-          child: _textComposerWidget(),
+          new Divider(height: 1.0,),
+          new Container(
+            decoration: new BoxDecoration(
+              color: Theme.of(context).cardColor,
+            ),
+            child: _textComposerWidget(),
 
-        )
-      ],
+          )
+        ],
       ),
-        floatingActionButton: Padding(
-            padding: const EdgeInsets.only(bottom: 570, right: 300),
-          child: FloatingActionButton(
-          child: Icon(Icons.navigation),
-          backgroundColor: Colors.green,
-          onPressed: () {
-            {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
-              );
-            }
-            },
-        )
-        )
+//        floatingActionButton: Padding(
+//            padding: const EdgeInsets.only(top: 570, right: 300),
+//          child: FloatingActionButton(
+//          child: Icon(Icons.navigation),
+//          backgroundColor: Colors.green,
+//          onPressed: () {
+//            {
+//              Navigator.push(
+//                context,
+//                MaterialPageRoute(builder: (context) => HomePage()),
+//              );
+//            }
+//            },
+//        )
+//        )
     );
   }
 }

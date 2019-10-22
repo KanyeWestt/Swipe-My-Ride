@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To F
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
 import 'package:path/path.dart' as Path;
+import 'mainScreen.dart';
 
 void main() => runApp(ImageUploaderRun());
 
@@ -85,7 +86,13 @@ class _ImageUploaderState extends State<ImageUploader> {
             _uploadedFileURL != null
                 ? RaisedButton(
                     child: Text('Done'),
-                    onPressed: null,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => SwipeMyRideMain()),
+                      );
+                    },
                     color: Colors.cyan,
                   )
                 : Container(),
