@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:signin/email_to_test.dart';
+import 'package:signin/email.dart';
 import 'package:signin/validator.dart';
 
 void main() {
