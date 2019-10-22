@@ -74,6 +74,21 @@ class _ImageUploaderState extends State<ImageUploader> {
                     height: 150,
                   )
                 : Container(),
+            SizedBox(height: 25),
+            _uploadedFileURL == null
+                ? RaisedButton(
+                    child: Text('Done'),
+                    onPressed: null,
+                    color: Colors.cyan,
+                  )
+                : Container(),
+            _uploadedFileURL != null
+                ? RaisedButton(
+                    child: Text('Done'),
+                    onPressed: null,
+                    color: Colors.cyan,
+                  )
+                : Container(),
           ],
         ),
       ),
@@ -119,8 +134,8 @@ class UploadFile {
   }
 
   StorageReference getStorageReference() {
-    if (this._storageReference != null) {
-      return this._storageReference;
+    if (_storageReference != null) {
+      return _storageReference;
     } else {
       return null;
     }
