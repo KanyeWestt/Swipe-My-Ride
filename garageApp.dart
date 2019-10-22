@@ -11,7 +11,10 @@ class GarageApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'The Crib',
+      title: 'Your Garage',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+      ),
       home: GaragePage(),
     );
   }
@@ -28,33 +31,35 @@ class _GaragePageState extends State<GaragePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.keyboard_backspace),
-          onPressed: () {
-            Navigator.push(
-              context,
-              new MaterialPageRoute(builder: (context) => SwipeMyRideMain()),
-            );
-          },
-        )
-      ],
-        title: Text('Swipe My Ride')),
+      appBar: AppBar(
+          leading: InkWell(
+            child: Icon(Icons.keyboard_backspace),
+            onTap: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => SwipeMyRideMain()),
+              );
+            },
+        ),
+        centerTitle: true,
+        title: Text('Your Garage')),
       body: _buildBody(context),
         floatingActionButton: Padding(
-            padding: const EdgeInsets.only(bottom: 570, right: 10),
-            child: FloatingActionButton(
-              child: Icon(Icons.navigation),
-              backgroundColor: Colors.green,
-              onPressed: () {
-                {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
-                }
-              },
-            )
+            padding: const EdgeInsets.only(top: 570, right: 10),
+            child: Container(
+              child: FloatingActionButton(
+                child: Icon(Icons.chat),
+                backgroundColor: Colors.green,
+                onPressed: () {
+                  {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  }
+                },
+              )
+          ),
         )
     );
   }

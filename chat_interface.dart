@@ -17,7 +17,7 @@ Widget build(BuildContext context){
       floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 570, right: 300),
           child: FloatingActionButton(
-            child: Icon(Icons.navigation),
+            child: Icon(Icons.chat),
             backgroundColor: Colors.green,
             onPressed: () {
               {
@@ -100,7 +100,7 @@ class _ConversationListItemState extends State<ConversationListItem>{
 
   _buildConversationTitle(){
     return Text(
-      'Fname Lname',
+      'User',
       style: TextStyle(
           fontSize: 18,
           color: Colors.black,

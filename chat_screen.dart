@@ -29,7 +29,7 @@ class ChatScreenState extends State<ChatScreen>{
   Widget _textComposerWidget(){
     return new IconTheme(
       data: new IconThemeData(
-        color: Colors.blue ),
+        color: Colors.purpleAccent ),
       child: new Container(
       margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: new Row(
@@ -78,21 +78,21 @@ class ChatScreenState extends State<ChatScreen>{
         )
       ],
       ),
-        floatingActionButton: Padding(
-            padding: const EdgeInsets.only(bottom: 570, right: 300),
-          child: FloatingActionButton(
-          child: Icon(Icons.navigation),
-          backgroundColor: Colors.green,
-          onPressed: () {
-            {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
-              );
-            }
-            },
-        )
-        )
+//        floatingActionButton: Padding(
+//            padding: const EdgeInsets.only(top: 570, right: 300),
+//          child: FloatingActionButton(
+//          child: Icon(Icons.navigation),
+//          backgroundColor: Colors.green,
+//          onPressed: () {
+//            {
+//              Navigator.push(
+//                context,
+//                MaterialPageRoute(builder: (context) => HomePage()),
+//              );
+//            }
+//            },
+//        )
+//        )
     );
   }
 }
