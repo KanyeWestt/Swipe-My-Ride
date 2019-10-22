@@ -62,12 +62,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   icon: Icon(Icons.add_circle_outline),
                   fillColor: Colors.white,
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a make:';
-                  }
-                  return null;
-                },
+                validator: MakeFieldValidator.validate,
                 onSaved: (value) {
                   values['make'] = value;
                 },
@@ -80,12 +75,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   icon: Icon(Icons.add_circle_outline),
                   fillColor: Colors.white,
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a model:';
-                  }
-                  return null;
-                },
+                validator: ModelFieldValidator.validate,
                 onSaved: (value) {
                   values['model'] = value;
                 },
@@ -99,12 +89,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   icon: Icon(Icons.add_circle_outline),
                   fillColor: Colors.white,
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a year:';
-                  }
-                  return null;
-                },
+                validator: YearFieldValidator.validate,
                 onSaved: (value) {
                   values['year'] = value;
                 },
@@ -117,12 +102,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   icon: Icon(Icons.add_circle_outline),
                   fillColor: Colors.white,
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please enter vehicle's location:";
-                  }
-                  return null;
-                },
+                validator: LocationFieldValidator.validate,
                 onSaved: (value) {
                   values['location'] = value;
                 },
@@ -136,12 +116,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   icon: Icon(Icons.add_circle_outline),
                   fillColor: Colors.white,
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please enter vehicle's mileage:";
-                  }
-                  return null;
-                },
+                validator: MileageFieldValidator.validate,
                 onSaved: (value) {
                   values['mileage'] = value;
                 },
@@ -155,12 +130,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   icon: Icon(Icons.add_circle_outline),
                   fillColor: Colors.white,
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter an asking price:';
-                  }
-                  return null;
-                },
+                validator: PriceFieldValidator.validate,
                 onSaved: (value) {
                   values['price'] = value;
                 },
@@ -189,5 +159,41 @@ class MyCustomFormState extends State<MyCustomForm> {
             ],
           ),
         )));
+  }
+}
+
+class MakeFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? 'Please enter a make:' : null;
+  }
+}
+
+class ModelFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? 'Please enter a model:' : null;
+  }
+}
+
+class YearFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? 'Please enter a year:' : null;
+  }
+}
+
+class LocationFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? "Please enter vehicle's location:" : null;
+  }
+}
+
+class MileageFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? "Please enter vehicle's mileage:" : null;
+  }
+}
+
+class PriceFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? 'Please enter an asking price:' : null;
   }
 }
