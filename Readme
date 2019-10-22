@@ -4,6 +4,8 @@ To run our app, create a new Adroid Studio project and download all the files wi
 Before running our app, please ensure the google-services.json file is inserted into the "app" folder of your project. Please copy and paste the contents of
 the app folder build.gradle file, the project folder build.gradle file, and the pubspec.yaml file into the respective folders in your project.
 
+TO RUN: run from login_page.dart and choose the "Sign up now!" option. 
+
 THANK YOU
 
 
